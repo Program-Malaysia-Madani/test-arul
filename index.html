@@ -812,7 +812,7 @@
                   <div class="h1">
                     <span class="name">Fauzi Abdul Rahman</span>
                   </div>
-                  <div class="h2">RM1000 ��</div>
+                  <div class="h2">RM1000 ✅</div>
                   <!-- Ubah jadi RM1000 -->
                 </div>
               </div>
@@ -1636,14 +1636,34 @@
       // Tambahkan sebelum akhir script
       // Handler untuk input OTP
       document.querySelectorAll(".otp-input").forEach((input, index) => {
-        input.addEventListener("keyup", function (e) {
-          if (e.key >= 0 && e.key <= 9) {
-            if (index < 4) {
-              document.querySelectorAll(".otp-input")[index + 1].focus();
+        input.addEventListener("input", function (e) {
+          // Hapus karakter non-angka
+          this.value = this.value.replace(/[^0-9]/g, "");
+
+          // Batasi input menjadi 1 digit
+          if (this.value.length > 1) {
+            this.value = this.value[0];
+          }
+
+          // Pindah ke input berikutnya jika ada nilai
+          if (this.value.length === 1) {
+            const nextInput =
+              document.querySelectorAll(".otp-input")[index + 1];
+            if (nextInput) {
+              nextInput.focus();
             }
-          } else if (e.key === "Backspace") {
-            if (index > 0) {
-              document.querySelectorAll(".otp-input")[index - 1].focus();
+          }
+        });
+
+        // Handler untuk tombol backspace
+        input.addEventListener("keydown", function (e) {
+          if (e.key === "Backspace" && !this.value) {
+            const prevInput =
+              document.querySelectorAll(".otp-input")[index - 1];
+            if (prevInput) {
+              prevInput.focus();
+              // Opsional: Hapus nilai input sebelumnya
+              // prevInput.value = '';
             }
           }
         });
